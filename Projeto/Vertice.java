@@ -3,10 +3,12 @@ package Projeto;
 import java.util.ArrayList;
 
 public class Vertice<T> {
+    private int id;
     private T dado;
     private ArrayList<Aresta<T>> arestas;
 
-    public Vertice(T valor){
+    public Vertice(int id, T valor){
+        this.id = id;
         this.dado = valor;
         this.arestas = new ArrayList<Aresta<T>>();
     }

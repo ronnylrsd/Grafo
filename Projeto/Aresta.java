@@ -1,11 +1,13 @@
 package Projeto;
 
 public class Aresta<T>{
+    private int id;
     private int peso;
     private Vertice<T> inicio;
     private Vertice<T> fim;
 
-    public Aresta(int peso, Vertice<T> inicio, Vertice<T> fim){
+    public Aresta(int id, int peso, Vertice<T> inicio, Vertice<T> fim){
+        this.id = id;
         this.peso = peso;
         this.inicio = inicio;
         this.fim = fim;

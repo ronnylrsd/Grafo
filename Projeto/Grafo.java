@@ -13,16 +13,16 @@ public class Grafo<T> {
         this.arestas = new ArrayList<Aresta<T>>();
     }
 
-    public void adicionarVertice(T dado){
-        Vertice<T> novoVertice = new Vertice<T>(dado);
+    public void adicionarVertice(int id, T dado){
+        Vertice<T> novoVertice = new Vertice<T>(id, dado);
         this.vertices.add(novoVertice);
 
     }
 
-    public void adicionarAresta(int peso, T dadoInicio, T dadoFim){
+    public void adicionarAresta(int id, int peso, T dadoInicio, T dadoFim){
         Vertice<T> inicio = this.getVertice(dadoInicio);
         Vertice<T> fim = this.getVertice(dadoFim);
-        Aresta<T> aresta = new Aresta<T>(peso, inicio, fim);
+        Aresta<T> aresta = new Aresta<T>(id, peso, inicio, fim);
         inicio.adicionarAresta(aresta);
         fim.adicionarAresta(aresta);
         this.arestas.add(aresta);
