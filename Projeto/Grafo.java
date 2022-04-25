@@ -60,4 +60,23 @@ public class Grafo<T> {
             fila.remove();
         }
     }
+
+    public void listarAdjacentes() {
+        for(int i = 0; i < this.vertices.size(); i++){
+            System.out.println("------------------");
+            System.out.println("Vertice ID: " + this.vertices.get(i).getId());
+            System.out.println("Vertice Valor: " + this.vertices.get(i).getDado());
+            System.out.println("Arestas Destino: ");
+            int contVerInicio = 0;
+            for(int j = 0; j < this.vertices.get(i).getAresta().size(); j++){
+                if(this.vertices.get(i).getAresta().get(j).getInicio().getId() == this.vertices.get(i).getId()){
+                    System.out.println(this.vertices.get(i).getAresta().get(j).getFim().getDado());
+                    contVerInicio++;
+                }
+            }
+            if(contVerInicio == 0) {
+                System.out.println("Não possui nenhuma.");
+            }
+        }
+    }
 }

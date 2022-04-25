@@ -14,7 +14,14 @@ public class main {
         // Lendo as arestas
         arquivo.lerArestas(grafo);
 
+        System.out.println("=====================");
+        // Lista de adjarcencia
+        System.out.println("Lista de Adjacentes");
+        grafo.listarAdjacentes();
+
+        System.out.println("=====================");
         // Imprimindo o grafo
+        System.out.println("Busca em Largura:");
         grafo.buscaEmLargura();
     }
 }
