@@ -19,9 +19,9 @@ public class Grafo<T> {
 
     }
 
-    public void adicionarAresta(int id, int peso, T dadoInicio, T dadoFim){
-        Vertice<T> inicio = this.getVertice(dadoInicio);
-        Vertice<T> fim = this.getVertice(dadoFim);
+    public void adicionarAresta(int id, double peso, int idInicio, int idFim){
+        Vertice<T> inicio = this.getVertice(idInicio);
+        Vertice<T> fim = this.getVertice(idFim);
         Aresta<T> aresta = new Aresta<T>(id, peso, inicio, fim);
         inicio.adicionarAresta(aresta);
         fim.adicionarAresta(aresta);
@@ -29,10 +29,10 @@ public class Grafo<T> {
     }
     //toda vez que for adicionar uma aresta
     //procura o vértice na lista de vértice ↓
-    private Vertice<T> getVertice(T dado){
+    Vertice<T> getVertice(int id){
         Vertice<T> vertice = null;
         for(int i = 0; i < this.vertices.size(); i++){
-            if(this.vertices.get(i).getDado().equals(dado)){
+            if(this.vertices.get(i).getId() == id){
                 vertice = this.vertices.get(i);
                 break;
             }

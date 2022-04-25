@@ -2,22 +2,22 @@ package Projeto;
 
 public class Aresta<T>{
     private int id;
-    private int peso;
+    private double peso;
     private Vertice<T> inicio;
     private Vertice<T> fim;
 
-    public Aresta(int id, int peso, Vertice<T> inicio, Vertice<T> fim){
+    public Aresta(int id, double peso, Vertice<T> inicio, Vertice<T> fim){
         this.id = id;
         this.peso = peso;
         this.inicio = inicio;
         this.fim = fim;
     }
 
-    public int getPeso(){
+    public double getPeso(){
         return peso;
     }
 
-    public void setPeso(int peso){
+    public void setPeso(double peso){
         this.peso = peso;
     }
 

@@ -13,6 +13,10 @@ public class Vertice<T> {
         this.arestas = new ArrayList<Aresta<T>>();
     }
 
+    public int getId(){
+        return id;
+    }
+
     public T getDado(){
         return dado;
     }
