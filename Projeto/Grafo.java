@@ -61,6 +61,29 @@ public class Grafo<T> {
         }
     }
 
+    public void buscaEmLargura2(String dadoBusca){
+        Queue<Vertice<T>> fila = new LinkedList<Vertice<T>>();
+        Vertice<T> atual = this.vertices.get(0);
+        atual.setCor("Cinza");
+        atual.setDistancia(0);
+        fila.add(atual);
+        while(fila.size() > 0){
+            Vertice<T> visitado = fila.peek();
+            for(int i = 0; i < visitado.getAresta().size(); i++){
+                Vertice<T> proximo = visitado.getAresta().get(i).getFim();
+                if(proximo.getCor().equals("Branco")){
+                    System.out.println(proximo.getDado());
+                    proximo.setCor("Cinza");
+                    proximo.setDistancia(visitado.getDistancia() + 1);
+                    proximo.setAnterior(visitado);
+                    fila.add(proximo);
+                }
+            }
+            visitado.setCor("Preto");
+            fila.remove();
+        }
+    }
+
     public void listarAdjacentes() {
         for(int i = 0; i < this.vertices.size(); i++){
             System.out.println("------------------");
@@ -71,6 +94,7 @@ public class Grafo<T> {
             for(int j = 0; j < this.vertices.get(i).getAresta().size(); j++){
                 if(this.vertices.get(i).getAresta().get(j).getInicio().getId() == this.vertices.get(i).getId()){
                     System.out.println(this.vertices.get(i).getAresta().get(j).getFim().getDado());
+                    this.vertices.get(i).adicionarAdjacente(this.vertices.get(i).getAresta().get(j));
                     contVerInicio++;
                 }
             }
