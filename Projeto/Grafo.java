@@ -3,6 +3,7 @@ package Projeto;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 
 public class Grafo<T> {
     private ArrayList<Vertice<T>> vertices;
@@ -40,28 +41,7 @@ public class Grafo<T> {
         return vertice;
     }
 
-    public void buscaEmLargura(){
-        ArrayList<Vertice<T>> marcados = new ArrayList<Vertice<T>>();
-        Queue<Vertice<T>> fila = new LinkedList<Vertice<T>>();
-        Vertice<T> atual = this.vertices.get(0);
-        marcados.add(atual);
-        System.out.println(atual.getDado());
-        fila.add(atual);
-        while(fila.size() > 0){
-            Vertice<T> visitado = fila.peek();
-            for(int i = 0; i < visitado.getAresta().size(); i++){
-                Vertice<T> proximo = visitado.getAresta().get(i).getFim();
-                if(!marcados.contains(proximo)){//se o próximo ainda não foi marcado
-                    marcados.add(proximo);
-                    System.out.println(proximo.getDado());
-                    fila.add(proximo);
-                }
-            }
-            fila.remove();
-        }
-    }
-
-    public void buscaEmLargura2(String dadoBusca){
+    public void buscaEmLargura(String dadoBusca){
         Queue<Vertice<T>> fila = new LinkedList<Vertice<T>>();
         Vertice<T> atual = this.vertices.get(0);
         atual.setCor("Cinza");
@@ -72,16 +52,30 @@ public class Grafo<T> {
             for(int i = 0; i < visitado.getAresta().size(); i++){
                 Vertice<T> proximo = visitado.getAresta().get(i).getFim();
                 if(proximo.getCor().equals("Branco")){
-                    System.out.println(proximo.getDado());
                     proximo.setCor("Cinza");
                     proximo.setDistancia(visitado.getDistancia() + 1);
                     proximo.setAnterior(visitado);
                     fila.add(proximo);
+                    if(proximo.getDado().equals(dadoBusca)){ //se achar o vertice
+                        System.out.println("Caminho encontrado.");
+                        Stack<Vertice<T>> caminho = new Stack<Vertice<T>>();
+                        caminho.push(proximo);
+                        while(proximo.getAnterior() != null){ //faz o caminho inverso salvando o caminho
+                            caminho.push(proximo.getAnterior());
+                            proximo = proximo.getAnterior();
+                        }
+                        System.out.println("Faça esse caminho:");
+                        while(caminho.size() > 0) { //imprime o caminho na ordem correta
+                            System.out.println(caminho.pop().getDado());
+                        }
+                        return;
+                    }
                 }
             }
             visitado.setCor("Preto");
             fila.remove();
         }
+        System.out.println("Caminho não encontrado.");
     }
 
     public void listarAdjacentes() {

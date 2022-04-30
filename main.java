@@ -27,6 +27,6 @@ public class main {
         System.out.println("Busca em Largura:");
         System.out.print("Informe o destino: ");
         String destino = in.nextLine();
-        grafo.buscaEmLargura2(destino);
+        grafo.buscaEmLargura(destino);
     }
 }
