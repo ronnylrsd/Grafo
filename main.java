@@ -1,21 +1,32 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Scanner;
+
+import Projeto.Arquivo;
 import Projeto.Grafo;
 
 public class main {
-    public static void main(String[] args){
+    public static void main(String[] args) throws FileNotFoundException, IOException{
         Grafo<String> grafo = new Grafo<String>();
-        grafo.adicionarVertice("João");
-        grafo.adicionarVertice("Lorenzo");
-        grafo.adicionarVertice("Creuza");
-        grafo.adicionarVertice("Créber");
-        grafo.adicionarVertice("Cráudio");
+        Arquivo arquivo = new Arquivo();
 
-        grafo.adicionarAresta(2, "João", "Lorenzo");
-        grafo.adicionarAresta(3, "Lorenzo", "Créber");
-        grafo.adicionarAresta(1, "Créber", "Creuza");
-        grafo.adicionarAresta(1, "João", "Creuza");
-        grafo.adicionarAresta(2, "Cráudio", "Lorenzo");
-        grafo.adicionarAresta(3, "Cráudio", "João");
+        Scanner in = new Scanner(System.in);
+        
+        // Lendo os vertices
+        arquivo.lerVertices(grafo);
+        // Lendo as arestas
+        arquivo.lerArestas(grafo);
 
-    grafo.buscaEmLargura();
+        System.out.println("=====================");
+        // Lista de adjarcencia
+        System.out.println("Lista de Adjacentes");
+        grafo.listarAdjacentes();
+
+        System.out.println("=====================");
+        // Imprimindo o grafo
+        System.out.println("Busca em Largura:");
+        System.out.print("Informe o destino: ");
+        String destino = in.nextLine();
+        grafo.buscaEmLargura(destino);
     }
 }
