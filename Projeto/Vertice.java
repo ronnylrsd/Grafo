@@ -11,6 +11,7 @@ public class Vertice<T> {
     private Vertice<T> anterior;
     private String cor;
     private int distancia;
+    private double peso;
 
     public Vertice(int id, T valor){
         this.id = id;
@@ -21,6 +22,7 @@ public class Vertice<T> {
         this.anterior = null;
         this.cor = "Branco";
         this.distancia = Integer.MAX_VALUE;
+        this.peso = Integer.MAX_VALUE;
     }
 
     public int getId(){
@@ -77,5 +79,13 @@ public class Vertice<T> {
 
     public void setDistancia(int distancia) {
         this.distancia = distancia;
+    }
+
+    public double getPeso() {
+        return this.peso;
+    }
+
+    public void setPeso(double peso) {
+        this.peso = peso;
     }
 }

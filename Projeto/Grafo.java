@@ -9,18 +9,18 @@ public class Grafo<T> {
     private ArrayList<Vertice<T>> vertices;
     private ArrayList<Aresta<T>> arestas;
 
-    public Grafo(){
+    public Grafo() {
         this.vertices = new ArrayList<Vertice<T>>();
         this.arestas = new ArrayList<Aresta<T>>();
     }
 
-    public void adicionarVertice(int id, T dado){
+    public void adicionarVertice(int id, T dado) {
         Vertice<T> novoVertice = new Vertice<T>(id, dado);
         this.vertices.add(novoVertice);
 
     }
 
-    public void adicionarAresta(int id, double peso, int idInicio, int idFim){
+    public void adicionarAresta(int id, double peso, int idInicio, int idFim) {
         Vertice<T> inicio = this.getVertice(idInicio);
         Vertice<T> fim = this.getVertice(idFim);
         Aresta<T> aresta = new Aresta<T>(id, peso, inicio, fim);
@@ -28,12 +28,13 @@ public class Grafo<T> {
         fim.adicionarAresta(aresta);
         this.arestas.add(aresta);
     }
-    //toda vez que for adicionar uma aresta
-    //procura o vértice na lista de vértice ↓
-    Vertice<T> getVertice(int id){
+
+    // toda vez que for adicionar uma aresta
+    // procura o vértice na lista de vértice ↓
+    Vertice<T> getVertice(int id) {
         Vertice<T> vertice = null;
-        for(int i = 0; i < this.vertices.size(); i++){
-            if(this.vertices.get(i).getId() == id){
+        for (int i = 0; i < this.vertices.size(); i++) {
+            if (this.vertices.get(i).getId() == id) {
                 vertice = this.vertices.get(i);
                 break;
             }
@@ -41,31 +42,51 @@ public class Grafo<T> {
         return vertice;
     }
 
-    public void buscaEmLargura(String dadoBusca){
+    public void listarAdjacentes() {
+        for (int i = 0; i < this.vertices.size(); i++) {
+            System.out.println("------------------");
+            System.out.println("Vertice ID: " + this.vertices.get(i).getId());
+            System.out.println("Vertice Valor: " + this.vertices.get(i).getDado());
+            System.out.println("Arestas Destino: ");
+            int contVerInicio = 0;
+            for (int j = 0; j < this.vertices.get(i).getAresta().size(); j++) {
+                if (this.vertices.get(i).getAresta().get(j).getInicio().getId() == this.vertices.get(i).getId()) {
+                    System.out.println(this.vertices.get(i).getAresta().get(j).getFim().getDado());
+                    this.vertices.get(i).adicionarAdjacente(this.vertices.get(i).getAresta().get(j));
+                    contVerInicio++;
+                }
+            }
+            if (contVerInicio == 0) {
+                System.out.println("Não possui nenhuma.");
+            }
+        }
+    }
+
+    public void buscaEmLargura(String dadoBusca) {
         Queue<Vertice<T>> fila = new LinkedList<Vertice<T>>();
         Vertice<T> atual = this.vertices.get(0);
         atual.setCor("Cinza");
         atual.setDistancia(0);
         fila.add(atual);
-        while(fila.size() > 0){
+        while (fila.size() > 0) {
             Vertice<T> visitado = fila.peek();
-            for(int i = 0; i < visitado.getAresta().size(); i++){
+            for (int i = 0; i < visitado.getAresta().size(); i++) {
                 Vertice<T> proximo = visitado.getAresta().get(i).getFim();
-                if(proximo.getCor().equals("Branco")){
+                if (proximo.getCor().equals("Branco")) {
                     proximo.setCor("Cinza");
                     proximo.setDistancia(visitado.getDistancia() + 1);
                     proximo.setAnterior(visitado);
                     fila.add(proximo);
-                    if(proximo.getDado().equals(dadoBusca)){ //se achar o vertice
+                    if (proximo.getDado().equals(dadoBusca)) { // se achar o vertice
                         System.out.println("Caminho encontrado.");
                         Stack<Vertice<T>> caminho = new Stack<Vertice<T>>();
                         caminho.push(proximo);
-                        while(proximo.getAnterior() != null){ //faz o caminho inverso salvando o caminho
+                        while (proximo.getAnterior() != null) { // faz o caminho inverso salvando o caminho
                             caminho.push(proximo.getAnterior());
                             proximo = proximo.getAnterior();
                         }
                         System.out.println("Faça esse caminho:");
-                        while(caminho.size() > 0) { //imprime o caminho na ordem correta
+                        while (caminho.size() > 0) { // imprime o caminho na ordem correta
                             System.out.println(caminho.pop().getDado());
                         }
                         return;
@@ -78,23 +99,54 @@ public class Grafo<T> {
         System.out.println("Caminho não encontrado.");
     }
 
-    public void listarAdjacentes() {
-        for(int i = 0; i < this.vertices.size(); i++){
-            System.out.println("------------------");
-            System.out.println("Vertice ID: " + this.vertices.get(i).getId());
-            System.out.println("Vertice Valor: " + this.vertices.get(i).getDado());
-            System.out.println("Arestas Destino: ");
-            int contVerInicio = 0;
-            for(int j = 0; j < this.vertices.get(i).getAresta().size(); j++){
-                if(this.vertices.get(i).getAresta().get(j).getInicio().getId() == this.vertices.get(i).getId()){
-                    System.out.println(this.vertices.get(i).getAresta().get(j).getFim().getDado());
-                    this.vertices.get(i).adicionarAdjacente(this.vertices.get(i).getAresta().get(j));
-                    contVerInicio++;
+    public void buscaComDijkstra(String dadoBusca) {
+        ArrayList<Vertice<T>> grafoAtual = this.vertices;
+        Vertice<T> atual = grafoAtual.get(0);
+        Vertice<T> achou = null;
+        atual.setPeso(0);
+        while (grafoAtual.size() > 0) {
+            int index = buscaPesoMin(grafoAtual);
+            Vertice<T> visitado = grafoAtual.get(index);
+            grafoAtual.remove(index);
+            if (visitado.getDado().equals(dadoBusca)) {
+                achou = visitado;
+            }
+            for (int i = 0; i < visitado.getAresta().size(); i++) {
+                Vertice<T> proximo = visitado.getAresta().get(i).getFim();
+                double peso = visitado.getPeso() + visitado.getAresta().get(i).getPeso();
+                if (peso < proximo.getPeso()) {
+                    proximo.setPeso(peso);
+                    proximo.setAnterior(visitado);
                 }
             }
-            if(contVerInicio == 0) {
-                System.out.println("Não possui nenhuma.");
+        }
+
+        if (achou != null) {
+            System.out.println("Caminho encontrado.");
+            Stack<Vertice<T>> caminho = new Stack<Vertice<T>>();
+            caminho.push(achou);
+            while (achou.getAnterior() != null) { // faz o caminho inverso salvando o caminho
+                caminho.push(achou.getAnterior());
+                achou = achou.getAnterior();
+            }
+            System.out.println("Faça esse caminho:");
+            while (caminho.size() > 0) { // imprime o caminho na ordem correta
+                System.out.println(caminho.pop().getDado());
+            }
+        } else {
+            System.out.println("Caminho não encontrado.");
+        }
+    }
+
+    public int buscaPesoMin(ArrayList<Vertice<T>> grafoAtual) {
+        int index = 0;
+        double pesoMin = Double.MAX_VALUE;
+        for (int i = 0; i < grafoAtual.size(); i++) {
+            if (grafoAtual.get(i).getPeso() < pesoMin) {
+                pesoMin = grafoAtual.get(i).getPeso();
+                index = i;
             }
         }
+        return index;
     }
 }
