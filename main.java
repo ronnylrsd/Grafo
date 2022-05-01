@@ -28,5 +28,12 @@ public class main {
         System.out.print("Informe o destino: ");
         String destino = in.nextLine();
         grafo.buscaEmLargura(destino);
+
+        System.out.println("=====================");
+        // Imprimindo o grafo
+        System.out.println("Busca com Dijkstra:");
+        System.out.print("Informe o destino: ");
+        destino = in.nextLine();
+        grafo.buscaComDijkstra(destino);
     }
 }
