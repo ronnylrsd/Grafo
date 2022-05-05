@@ -1,36 +1,36 @@
-21,"Entrada Pedestre/Veiculos rua do Principe"
-12,"Fasa Grafica"
-22,"Itau"
-25,"Estacionamento"
-11,"Quadra Esportiva"
-23,"Entrada 1 Bloco A"
-24,"Saida Veiculos Rua do Principe"
-2,"Pavilhao Maker"
-36,"Bicicletario"
-14,"Capela"
-26,"Grande Arvore"
-13,"Residencia dos Jesuitas"
-5,"Bloco B"
-17,"Elevador 1 - Bloco A"
-1,"Bloco A"
-27,"Praca Alimentacao"
-18,"Elevador 2 - Bloco A"
-28,"Quiosque - Delicia Natura"
-6,"Bloco D"
-30,"Entrada/Saida Bloco G"
-31,"Lavador de Maos"
-38,"Entrada/Saida Bloco R (Reitoria)"
-7,"Bloco R (Reitoria)"
-8,"Salao Receptivo"
-32,"Centro de informacoes"
-19,"Elevador 1 - Bloco G"
-3,"Bloco G"
-35,"Cafe com Que"
-20,"Elevador 2 - Bloco G"
-37,"Entrada/Saida G4"
-4,"Bloco G4"
-34,"Bisnagueira"
-33,"Jasmim-Manga"
-9,"Jardim"
-10,"Biblioteca Central"
-29,"Entrada/Saida Pedestres Rua do Lazer"
+21,'Entrada Pedestre/Veiculos rua do Principe'
+12,'Fasa Grafica'
+22,'Itau'
+25,'Estacionamento'
+11,'Quadra Esportiva'
+23,'Entrada 1 Bloco A'
+24,'Saida Veiculos Rua do Principe'
+2,'Pavilhao Maker'
+36,'Bicicletario'
+14,'Capela'
+26,'Grande Arvore'
+13,'Residencia dos Jesuitas'
+5,'Bloco B'
+17,'Elevador 1 - Bloco A'
+1,'Bloco A'
+27,'Praca Alimentacao'
+18,'Elevador 2 - Bloco A'
+28,'Quiosque - Delicia Natura'
+6,'Bloco D'
+30,'Entrada/Saida Bloco G'
+31,'Lavador de Maos'
+38,'Entrada/Saida Bloco R (Reitoria)'
+7,'Bloco R (Reitoria)'
+8,'Salao Receptivo'
+32,'Centro de informacoes'
+19,'Elevador 1 - Bloco G'
+3,'Bloco G'
+35,'Cafe com Que'
+20,'Elevador 2 - Bloco G'
+37,'Entrada/Saida G4'
+4,'Bloco G4'
+34,'Bisnagueira'
+33,'Jasmim-Manga'
+9,'Jardim'
+10,'Biblioteca Central'
+29,'Entrada/Saida Pedestres Rua do Lazer'

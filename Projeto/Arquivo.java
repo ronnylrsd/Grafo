@@ -10,7 +10,7 @@ public class Arquivo {
     public Grafo<String> lerVertices(Grafo<String> grafo) throws FileNotFoundException, IOException {
         int id;
         String nome;
-        String arquivo = "E:\\Ramon\\Documentos\\GitHub\\Grafo\\Entrada\\vertices.txt";
+        String arquivo = "C:\\Users\\djalm\\Documents\\GitKraken\\Grafo\\Entrada\\vertices.txt";
         BufferedReader buffer = new BufferedReader(new FileReader(arquivo));
         for (int i = 0; i < 100; i++) {
             String linha = buffer.readLine();
@@ -20,8 +20,7 @@ public class Arquivo {
             String info[] = new String[100];
             info = linha.split(",");
             id = Integer.parseInt(info[0]);
-            nome = info[1];
-
+            nome = info[1].replace("'", ""); // Removendo os espaços;
             grafo.adicionarVertice(id, nome);
         }
 
@@ -31,7 +30,7 @@ public class Arquivo {
     public Grafo<String> lerArestas(Grafo<String> grafo) throws FileNotFoundException, IOException {
         int id, origem, destino;
         double peso;
-        String arquivo = "E:\\Ramon\\Documentos\\GitHub\\Grafo\\Entrada\\arestas.txt";
+        String arquivo = "C:\\Users\\djalm\\Documents\\GitKraken\\Grafo\\Entrada\\arestas.txt";
         BufferedReader buffer = new BufferedReader(new FileReader(arquivo));
         for (int i = 0; i < 100; i++) {
             String linha = buffer.readLine();
