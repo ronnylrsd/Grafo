@@ -65,6 +65,7 @@ public class Grafo<T> {
     public void buscaEmLargura(String dadoBusca) {
         Queue<Vertice<T>> fila = new LinkedList<Vertice<T>>();
         Vertice<T> atual = this.vertices.get(0);
+        Vertice<T> achou = null;
         atual.setCor("Cinza");
         atual.setDistancia(0);
         fila.add(atual);
@@ -74,27 +75,34 @@ public class Grafo<T> {
                 Vertice<T> proximo = visitado.getAresta().get(i).getFim();
                 if (proximo.getCor().equals("Branco")) {
                     proximo.setCor("Cinza");
-                    proximo.setDistancia(visitado.getDistancia() + 1);
+                    if (proximo.getDistancia() > visitado.getDistancia() + 1) {
+                        proximo.setDistancia(visitado.getDistancia() + 1);
+                    }
                     proximo.setAnterior(visitado);
                     fila.add(proximo);
                     if (proximo.getDado().equals(dadoBusca)) { // se achar o vertice
-                        System.out.println("Caminho encontrado.");
-                        Stack<Vertice<T>> caminho = new Stack<Vertice<T>>();
-                        caminho.push(proximo);
-                        while (proximo.getAnterior() != null) { // faz o caminho inverso salvando o caminho
-                            caminho.push(proximo.getAnterior());
-                            proximo = proximo.getAnterior();
-                        }
-                        System.out.println("Faça esse caminho:");
-                        while (caminho.size() > 0) { // imprime o caminho na ordem correta
-                            System.out.println(caminho.pop().getDado());
-                        }
-                        return;
+                        achou = proximo;
                     }
                 }
             }
             visitado.setCor("Preto");
             fila.remove();
+        }
+
+        if (achou != null) {
+            System.out.println("Caminho encontrado.");
+            Stack<Vertice<T>> caminho = new Stack<Vertice<T>>();
+            Vertice<T> proximo = achou;
+            caminho.push(proximo);
+            while (proximo.getAnterior() != null) { // faz o caminho inverso salvando o caminho
+                caminho.push(proximo.getAnterior());
+                proximo = proximo.getAnterior();
+            }
+            System.out.println("Faça esse caminho:");
+            while (caminho.size() > 0) { // imprime o caminho na ordem correta
+                System.out.println(caminho.pop().getDado());
+            }
+            return;
         }
         System.out.println("Caminho não encontrado.");
     }
