@@ -100,14 +100,14 @@ public class Grafo<T> {
     }
 
     public void buscaComDijkstra(String dadoBusca) {
-        ArrayList<Vertice<T>> grafoAtual = this.vertices;
-        Vertice<T> atual = grafoAtual.get(0);
+        ArrayList<Vertice<T>> verticesAtuais = this.vertices;
+        Vertice<T> atual = verticesAtuais.get(0);
         Vertice<T> achou = null;
         atual.setPeso(0);
-        while (grafoAtual.size() > 0) {
-            int index = buscaPesoMin(grafoAtual);
-            Vertice<T> visitado = grafoAtual.get(index);
-            grafoAtual.remove(index);
+        while (verticesAtuais.size() > 0) {
+            int index = buscaPesoMin(verticesAtuais);
+            Vertice<T> visitado = verticesAtuais.get(index);
+            verticesAtuais.remove(index);
             if (visitado.getDado().equals(dadoBusca)) {
                 achou = visitado;
             }
@@ -138,12 +138,12 @@ public class Grafo<T> {
         }
     }
 
-    public int buscaPesoMin(ArrayList<Vertice<T>> grafoAtual) {
+    public int buscaPesoMin(ArrayList<Vertice<T>> verticeAtual) {
         int index = 0;
         double pesoMin = Double.MAX_VALUE;
-        for (int i = 0; i < grafoAtual.size(); i++) {
-            if (grafoAtual.get(i).getPeso() < pesoMin) {
-                pesoMin = grafoAtual.get(i).getPeso();
+        for (int i = 0; i < verticeAtual.size(); i++) {
+            if (verticeAtual.get(i).getPeso() < pesoMin) {
+                pesoMin = verticeAtual.get(i).getPeso();
                 index = i;
             }
         }
